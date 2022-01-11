@@ -1,16 +1,27 @@
 import { MovieListType } from '../../dataStructure';
-import { Item } from './Item';
 
 type MoviesProps = {
   movies: MovieListType;
+  onClickMovie: Function;
 };
 
-export const Movies: React.FC<MoviesProps> = ({ movies }) => {
+export const Movies: React.FC<MoviesProps> = ({ movies, onClickMovie }) => {
+  const handlClick = (id: number) => {
+    onClickMovie(id);
+  };
   return (
     <div className="bg-amber-600 basis-11/12 overflow-y-auto no-scrollbar">
-      <ul className="">
+      <ul>
         {movies.map((movie) => {
-          return <Item key={movie.id} movie={movie} />;
+          return (
+            <li
+              key={movie.id}
+              onClick={() => handlClick(movie.id)}
+              className="m-2 p-1 text-xl border-b-2 border-white"
+            >
+              {movie.title}
+            </li>
+          );
         })}
       </ul>
     </div>
