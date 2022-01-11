@@ -34,12 +34,12 @@ function App(): JSX.Element {
   };
 
   return (
-    <div className="text-3xl font-bold flex h-screen">
-      <div className="w-1/3 flex flex-col">
+    <div className="text-3xl font-bold flex h-screen bg-slate-400">
+      <div className="w-1/3 flex flex-col border-r-2 border-black">
         <SearchBar onChangeInputValue={searchMovies} searchValue={searchInput} />
         <Movies onClickMovie={selectMovie} movies={searchInput ? filteredResults : movies} />
       </div>
-      <div className="bg-amber-700 w-2/3">
+      <div className="w-2/3">
         <MovieDetails movie={selectedMovie} />
       </div>
     </div>

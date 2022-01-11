@@ -5,7 +5,7 @@ type Props = {
 
 export const SearchBar: React.FC<Props> = ({ onChangeInputValue, searchValue }) => {
   return (
-    <div className="bg-amber-500 basis-1/12 flex items-center justify-center">
+    <div className="bg-blue-700 basis-1/12 flex items-center justify-center">
       <form action="" className="">
         <div className="relative text-gray-700">
           <input
