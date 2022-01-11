@@ -1,18 +1,16 @@
-import { Movie } from './Movie';
+import { MovieListType } from '../../dataStructure';
+import { Item } from './Item';
 
 type MoviesProps = {
-  movies: {
-    id: number;
-    title: string;
-  }[];
+  movies: MovieListType;
 };
 
-export const Movies = ({ movies }: MoviesProps): JSX.Element => {
+export const Movies: React.FC<MoviesProps> = ({ movies }) => {
   return (
     <div className="bg-amber-600 basis-11/12 overflow-y-auto no-scrollbar">
       <ul className="">
-        {movies.map(({ id, title }) => {
-          return <Movie key={id} title={title} />;
+        {movies.map((movie) => {
+          return <Item key={movie.id} movie={movie} />;
         })}
       </ul>
     </div>
