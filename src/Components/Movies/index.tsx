@@ -1,13 +1,19 @@
 import { Movie } from './Movie';
 
-export const Movies = (): JSX.Element => {
+type MoviesProps = {
+  movies: {
+    id: number;
+    title: string;
+  }[];
+};
+
+export const Movies = ({ movies }: MoviesProps): JSX.Element => {
   return (
-    <div className="bg-amber-600 basis-11/12">
-      <ul className="m-4 p-1 bg-amber-400">
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
+    <div className="bg-amber-600 basis-11/12 overflow-y-auto no-scrollbar">
+      <ul className="">
+        {movies.map(({ id, title }) => {
+          return <Movie key={id} title={title} />;
+        })}
       </ul>
     </div>
   );
