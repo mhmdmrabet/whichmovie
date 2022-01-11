@@ -21,6 +21,10 @@ export const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
       <p className="text-lg">{movie?.overview}</p>
     </div>
   );
-  const MovieDetailsDefaultJSX = <h2>Choose a movie</h2>;
+  const MovieDetailsDefaultJSX = (
+    <div className="text-center pt-10">
+      <h2>Choose a movie</h2>
+    </div>
+  );
   return <div className="">{movie ? MovieDetailsJSX : MovieDetailsDefaultJSX}</div>;
 };
