@@ -12,17 +12,18 @@ export const Movies: React.FC<MoviesProps> = ({ movies, onClickMovie }) => {
   return (
     <div className="basis-11/12 overflow-y-auto no-scrollbar">
       <ul>
-        {movies.map((movie) => {
-          return (
-            <li
-              key={movie.id}
-              onClick={() => handlClick(movie.id)}
-              className="m-2 p-1 text-xl border-b-2 border-blue-50 hover:cursor-pointer"
-            >
-              {movie.title}
-            </li>
-          );
-        })}
+        {movies &&
+          movies.map((movie) => {
+            return (
+              <li
+                key={movie.id}
+                onClick={() => handlClick(movie.id)}
+                className="m-2 p-1 text-xl border-b-2 border-blue-50 hover:cursor-pointer"
+              >
+                {movie.title}
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

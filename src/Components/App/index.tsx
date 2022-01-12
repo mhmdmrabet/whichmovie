@@ -6,11 +6,24 @@ import moviesData from '../../data/movies.json';
 import { useState } from 'react';
 import { Movie, MovieListType } from '../../dataStructure';
 import { APP_KEY, BASE_URL } from '../../api/utils';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App(): JSX.Element {
   const [movies, setMovies] = useState<MovieListType>([]);
   const [searchInput, setSearchInput] = useState('');
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+
+  const notify = () =>
+    toast.error('Error from API', {
+      position: 'bottom-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   // * Find Movies by title & setMovies on success
   const findMovies = useQuery(
@@ -19,11 +32,17 @@ function App(): JSX.Element {
       const result = await fetch(
         `${BASE_URL}/search/movie?sort_by=popularity.desc&api_key=${APP_KEY}&query=${searchInput}`
       );
+      if (!result.ok) {
+        throw new Error('Network response was not ok');
+      }
       return result.json();
     },
     {
       onSuccess: (data: { results: MovieListType }): void => {
         setMovies(data.results);
+      },
+      onError: () => {
+        notify();
       },
       enabled: false,
     }
@@ -36,15 +55,18 @@ function App(): JSX.Element {
       const result = await fetch(
         `${BASE_URL}/discover/movie?sort_by=popularity.desc&api_key=${APP_KEY}`
       );
+      if (!result.ok) {
+        throw new Error('Network response was not ok');
+      }
       return result.json();
     },
     {
       onSuccess: (data: { results: MovieListType }): void => {
         setMovies(data.results);
-        setSelectedMovie(movies[0]);
       },
       onError: (): void => {
         setMovies(moviesData.results);
+        notify();
       },
     }
   );
@@ -68,6 +90,7 @@ function App(): JSX.Element {
 
   return (
     <div className="text-3xl flex h-screen bg-blue-100 text-gray-600">
+      <ToastContainer />
       <div className="w-1/3 flex flex-col border-r-2 border-blue-50 my-2">
         <SearchBar onChangeInputValue={searchMovies} searchValue={searchInput} />
         {fetchFirstMovies.isLoading ? (
