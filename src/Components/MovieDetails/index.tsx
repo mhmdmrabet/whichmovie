@@ -1,10 +1,11 @@
-import { Movie } from '../dataStructure';
+import { Movie } from './../../dataStructure';
 
 type MovieDetailsProps = {
   movie: Movie | null;
 };
 
 export const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
+  // TODO Add ratings
   const MovieDetailsJSX = (
     <div className="p-8 space-y-4 text-2xl">
       <div className="flex space-x-4">
@@ -15,7 +16,7 @@ export const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
         />
         <div className="space-y-4">
           <h2>{movie?.title}</h2>
-          <h3>{movie?.vote_average} / 5</h3>
+          <h3>{movie ? movie.vote_average / 2 : 0} / 5</h3>
         </div>
       </div>
       <p className="text-lg">{movie?.overview}</p>

@@ -17,7 +17,7 @@ export const Movies: React.FC<MoviesProps> = ({ movies, onClickMovie }) => {
             <li
               key={movie.id}
               onClick={() => handlClick(movie.id)}
-              className="m-2 p-1 text-xl border-b-2 border-blue-700 hover:cursor-pointer"
+              className="m-2 p-1 text-xl border-b-2 border-blue-50 hover:cursor-pointer"
             >
               {movie.title}
             </li>

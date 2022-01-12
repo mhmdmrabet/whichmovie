@@ -1,15 +1,15 @@
-type Props = {
+type SearchBarProps = {
   onChangeInputValue: React.FormEventHandler<HTMLInputElement>;
   searchValue: string;
 };
 
-export const SearchBar: React.FC<Props> = ({ onChangeInputValue, searchValue }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ onChangeInputValue, searchValue }) => {
   return (
     <div className="basis-1/12 flex items-center justify-center">
       <form action="" className="">
         <div className="relative text-gray-700">
           <input
-            className="w-full h-14 pl-10 pr-3 text-base placeholder-gray-600 border rounded-lg border-blue-700  focus:shadow-outline"
+            className="w-full h-14 pl-10 pr-3 text-base placeholder-gray-600 border rounded-lg border-blue-50 bg-blue-50 focus:outline-none focus:border-blue-200 focus:border-2"
             type="text"
             placeholder="Search"
             onChange={onChangeInputValue}
