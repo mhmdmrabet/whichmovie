@@ -12,24 +12,24 @@ function App(): JSX.Element {
   const [searchInput, setSearchInput] = useState('');
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  // TODO add comments & handle error
+  // * Find Movies by title & setMovies on success
   const findMovies = useQuery(
     'searchMovies',
-    async () => {
+    async (): Promise<MovieListType> => {
       const result = await fetch(
         `${BASE_URL}/search/movie?sort_by=popularity.desc&api_key=${APP_KEY}&query=${searchInput}`
       );
       return result.json();
     },
     {
-      onSuccess: (data) => {
+      onSuccess: (data: { results: MovieListType }): void => {
         setMovies(data.results);
       },
       enabled: false,
     }
   );
 
-  // TODO add comments & handle error
+  // * Fetch movies by popularity & onSuccess setMovies
   const fetchFirstMovies = useQuery(
     'movies',
     async (): Promise<MovieListType> => {
@@ -39,17 +39,17 @@ function App(): JSX.Element {
       return result.json();
     },
     {
-      onSuccess: (data: { results: MovieListType }) => {
+      onSuccess: (data: { results: MovieListType }): void => {
         setMovies(data.results);
         setSelectedMovie(movies[0]);
       },
-      onError: () => {
+      onError: (): void => {
         setMovies(moviesData.results);
       },
     }
   );
 
-  // TODO add comments
+  // * SetState & Launch a search when the user writes in the search bar
   const searchMovies = (event: React.FormEvent<HTMLInputElement>): void => {
     const keyword = event.currentTarget.value;
     setSearchInput(keyword);
@@ -60,7 +60,7 @@ function App(): JSX.Element {
     }
   };
 
-  // TODO add comments
+  // * Change the selected movie when user clicks in the movie list
   const selectMovie = (id: number) => {
     const movie = movies.find((item) => item.id === id)!;
     setSelectedMovie(movie);

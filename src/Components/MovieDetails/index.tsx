@@ -26,7 +26,6 @@ export const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
   // * Calculate rating
   const rating = movie ? Math.round(movie?.vote_average / 2) : 0;
 
-  // TODO Add ratings
   const MovieDetailsJSX = (
     <div className="p-8 space-y-4 text-2xl">
       <div className="flex space-x-4">
