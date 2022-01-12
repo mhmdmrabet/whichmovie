@@ -1,5 +1,11 @@
 <div id="top"></div>
 
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+<img src="./whichmovie.png" height="350" alt="wichmovie">
+
 ## Getting Started
 
 ### Installation
